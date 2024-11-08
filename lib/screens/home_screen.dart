@@ -1,4 +1,4 @@
-
+import 'package:education_app/screens/course_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -30,6 +30,12 @@ List<Icon> catIcons = [
   Icon(Icons.emoji_events,color: Colors.white, size: 30),
 ];
 
+List imgList = [
+  'flutter',
+  'reactNative',
+  'python',
+  'javascript',
+];
 class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -121,17 +127,109 @@ class HomePage extends StatelessWidget{
                             color: catColors[index],
                             shape: BoxShape.circle,
                           ),
-                          child: Center(child: catIcons[index],),
-                        )
+                          child: Center(child: catIcons[index],
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          catNames[index],
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black.withOpacity(0.7),
+                          ),
+                        ),
                       ]
                     );
                   },
-              )
-            ],),
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Courses",
+                    style: TextStyle(
+                      fontSize: 23,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    "See All",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF674AEF)
+                    ),
+                  ),
+                
+            ],
             ),
+            SizedBox(height: 10),
+            GridView.builder(
+              itemCount: imgList.length,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: (MediaQuery.of(context).size.height - 50 - 25) / (4 * 240),
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => 
+                        CourseScreen(imgList[index]),
+                      ));
+                    },
+                    child: Container(
+                      padding:
+                      EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Color(0xFFF5FF3FF),
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Image.asset(
+                            "images/${imgList[index]}.png",
+                            width: 200,
+                            height: 200,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text("55 Videos", style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color:Colors.black.withOpacity(0.5),
+                        ),
+                        ),
+                      ],
+                    ),
+                    ),
+                  );
+                }
+            )
+        ],),
            
-        ],
+      ),],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 32,
+        selectedItemColor: Color(0xFF674aef),
+        selectedFontSize: 18,
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: true,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment),label: 'Courses'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite),label: 'Wishlist'),
+          BottomNavigationBarItem(icon: Icon(Icons.person),label: 'Account'),
+        ],
+        ),
     );
   
   }

@@ -25,7 +25,7 @@ class WelcomeScreen extends StatelessWidget{
                   color: Color(0xFF674AEF),
                   borderRadius: BorderRadius.only(bottomRight:Radius.circular(70)),
                 ),
-                child: Center(child: Image.asset("images/study.avif", scale: 0.8,)
+                child: Center(child: Image.asset("images/reading.png", scale: 0.8,)
               ),
             )
           ],
